@@ -152,7 +152,12 @@ public class Main extends JFrame implements ActionListener {
       if (e.getSource() == cancel) dispose();
       else if (e.getSource() == save) {
         if (nameTxt.getText().length() > 0 && priceTxt.getText().length() > 0) {
-          itemsWithPrices.add(nameTxt.getText() + " = " + priceTxt.getText());
+          if (hasSugarCheckmark.isSelected()) {
+            itemsWithSugar.add(nameTxt.getText());
+            itemsWithPrices.add(nameTxt.getText() + " = " + priceTxt.getText() + " || Has_Sugar");
+          } else {
+            itemsWithPrices.add(nameTxt.getText() + " = " + priceTxt.getText() + " || No_Sugar");
+          }
           itemsList.add(nameTxt.getText());
           allItems.removeAllElements();
           for (int i = 0; i < itemsWithPrices.size(); i++) {
@@ -165,9 +170,6 @@ public class Main extends JFrame implements ActionListener {
           itemSelect.removeAllItems();
           for (int i = 0; i < items.length; i++) {
             itemSelect.addItem(items[i]);
-          }
-          if (hasSugarCheckmark.isSelected()) {
-            itemsWithSugar.add(nameTxt.getText());
           }
           nameTxt.setText("");
           priceTxt.setText("");
