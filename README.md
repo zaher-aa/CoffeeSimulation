@@ -24,7 +24,8 @@ A desktop app created due to university reasons, it provides the user the abilit
 - ### Show Items
     A list that allows to display all the items for the user and their prices and the ability to delete the item from the list
     
-    ![](https://i.imgur.com/9vmJU8d.png)
+    ![image](https://user-images.githubusercontent.com/78752405/147649482-e0eb0812-eed4-4ec8-a1f3-98d36d7dea2d.png)
+
     
 ## ➤ Developer
 - Developed by **[Zaher J. Abuamro](https://github.com/zaher-aa)**
