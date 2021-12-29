@@ -171,6 +171,7 @@ public class Main extends JFrame implements ActionListener {
           }
           nameTxt.setText("");
           priceTxt.setText("");
+          JOptionPane.showMessageDialog(this, "Item has been added successfully");
         } else {
           JOptionPane.showMessageDialog(this, "Please fill all required fields", "Warning", JOptionPane.WARNING_MESSAGE);
         }
