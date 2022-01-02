@@ -21,7 +21,7 @@ public class Main extends JFrame implements ActionListener {
   public DefaultListModel<String> allItems = new DefaultListModel<>();
   public JList<String> list = new JList<>(allItems);
   public ArrayList<String> itemsWithSugar = new ArrayList<String>();
-  
+
   public Main() {
     super("Shop");
     this.setVisible(true);
@@ -32,33 +32,32 @@ public class Main extends JFrame implements ActionListener {
     pane.setLayout(null);
     home.setLayout(null);
     admin.setLayout(null);
-    
-    String[] sugarAmount = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    
+
+    String[] sugarAmount = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
     // labels
     name = new JLabel("Name");
     item = new JLabel("Item");
     amountOfSugar = new JLabel("Amount Of Sugar");
     price = new JLabel("Price");
-    
+
     // txt fields
     nameTxt = new JTextField();
     priceTxt = new JTextField();
-    
+
     // select fields
     itemSelect = new JComboBox(items);
     sugarSelect = new JComboBox(sugarAmount);
-    
+
     // button
     order = new JButton("Order");
     newItem = new JButton("New Item");
     showItems = new JButton("Show Item");
-    
+
     tabbedPane.setBounds(0, 0, 700, 500);
     tabbedPane.add("Home", home);
     tabbedPane.add("Admin", admin);
-    
-    
+
     name.setBounds(10, 20, 250, 50);
     item.setBounds(10, 105, 250, 50);
     amountOfSugar.setBounds(10, 190, 250, 50);
@@ -70,7 +69,7 @@ public class Main extends JFrame implements ActionListener {
     order.setBounds(300, 350, 100, 50);
     newItem.setBounds(250, 100, 200, 50);
     showItems.setBounds(250, 280, 200, 50);
-    
+
     home.add(name);
     home.add(item);
     home.add(amountOfSugar);
@@ -83,7 +82,7 @@ public class Main extends JFrame implements ActionListener {
     admin.add(newItem);
     admin.add(showItems);
     pane.add(tabbedPane);
-    
+
     // eventListener for itemSelect
     itemSelect.addActionListener(event -> {
       JComboBox comboBox = (JComboBox) event.getSource();
@@ -94,20 +93,20 @@ public class Main extends JFrame implements ActionListener {
         sugarSelect.setEnabled(true);
       }
     });
-    
+
     // Action Events
     newItem.addActionListener(this);
     showItems.addActionListener(this);
     order.addActionListener(this);
   }
-  
+
   class NewItem extends JFrame implements ActionListener {
     JButton save, cancel;
     JLabel name, price, hasSugar;
     JTextField nameTxt, priceTxt;
     JCheckBox hasSugarCheckmark;
     Container pane;
-    
+
     public NewItem() {
       super("New Item");
       this.setVisible(true);
@@ -115,7 +114,7 @@ public class Main extends JFrame implements ActionListener {
       this.setLocation(450, 300);
       this.setLayout(null);
       pane = this.getContentPane();
-      
+
       save = new JButton("Save");
       cancel = new JButton("Cancel");
       name = new JLabel("Item Name");
@@ -124,7 +123,7 @@ public class Main extends JFrame implements ActionListener {
       nameTxt = new JTextField();
       priceTxt = new JTextField();
       hasSugarCheckmark = new JCheckBox();
-      
+
       name.setBounds(20, 20, 150, 50);
       price.setBounds(20, 90, 150, 50);
       hasSugar.setBounds(20, 160, 150, 50);
@@ -133,7 +132,7 @@ public class Main extends JFrame implements ActionListener {
       hasSugarCheckmark.setBounds(170, 175, 20, 20);
       save.setBounds(130, 250, 100, 50);
       cancel.setBounds(260, 250, 100, 50);
-      
+
       pane.add(save);
       pane.add(cancel);
       pane.add(name);
@@ -142,14 +141,15 @@ public class Main extends JFrame implements ActionListener {
       pane.add(nameTxt);
       pane.add(priceTxt);
       pane.add(hasSugarCheckmark);
-      
+
       // Action Events
       cancel.addActionListener(this);
       save.addActionListener(this);
     }
-    
+
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == cancel) dispose();
+      if (e.getSource() == cancel)
+        dispose();
       else if (e.getSource() == save) {
         if (nameTxt.getText().length() > 0 && priceTxt.getText().length() > 0) {
           if (hasSugarCheckmark.isSelected()) {
@@ -175,16 +175,17 @@ public class Main extends JFrame implements ActionListener {
           priceTxt.setText("");
           JOptionPane.showMessageDialog(this, "Item has been added successfully");
         } else {
-          JOptionPane.showMessageDialog(this, "Please fill all required fields", "Warning", JOptionPane.WARNING_MESSAGE);
+          JOptionPane.showMessageDialog(this, "Please fill all required fields", "Warning",
+              JOptionPane.WARNING_MESSAGE);
         }
       }
     }
   }
-  
+
   class ShowItems extends JFrame implements ActionListener {
     Container pane;
     JButton delete;
-    
+
     public ShowItems() {
       super("Show Items");
       this.setVisible(true);
@@ -194,18 +195,17 @@ public class Main extends JFrame implements ActionListener {
       pane = this.getContentPane();
       list = new JList<>(allItems);
       delete = new JButton("Delete");
-      
+
       list.setBounds(30, 30, 250, 280);
       delete.setBounds(200, 350, 130, 50);
-      
-      
+
       pane.add(list);
       pane.add(delete);
-      
+
       // Action Events
       delete.addActionListener(this);
     }
-    
+
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == delete) {
         try {
@@ -222,19 +222,22 @@ public class Main extends JFrame implements ActionListener {
             itemSelect.addItem(items[i]);
           }
         } catch (Exception e1) {
-          JOptionPane.showMessageDialog(this, "Please select an item to delete it", "Warning", JOptionPane.WARNING_MESSAGE);
+          JOptionPane.showMessageDialog(this, "Please select an item to delete it", "Warning",
+              JOptionPane.WARNING_MESSAGE);
         }
       }
     }
   }
-  
+
   public static void main(String[] args) {
     new Main();
   }
-  
+
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == newItem) new NewItem();
-    else if (e.getSource() == showItems) new ShowItems();
+    if (e.getSource() == newItem)
+      new NewItem();
+    else if (e.getSource() == showItems)
+      new ShowItems();
     else if (e.getSource() == order) {
       if (nameTxt.getText().length() > 0 && priceTxt.getText().length() > 0 && items.length > 0) {
         String itemName = itemSelect.getSelectedItem().toString();
@@ -253,11 +256,13 @@ public class Main extends JFrame implements ActionListener {
         if (actualPrice == itemPrice) {
           JOptionPane.showMessageDialog(this, "Item purchased successfully");
         } else {
-          JOptionPane.showMessageDialog(this, "Please write the correct price", "Error Message", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(this, "Please write the correct price", "Error Message",
+              JOptionPane.ERROR_MESSAGE);
         }
       } else {
-        JOptionPane.showMessageDialog(this, "Please fill in all the required fields", "Warning", JOptionPane.WARNING_MESSAGE);
-        
+        JOptionPane.showMessageDialog(this, "Please fill in all the required fields", "Warning",
+            JOptionPane.WARNING_MESSAGE);
+
       }
     }
   }
